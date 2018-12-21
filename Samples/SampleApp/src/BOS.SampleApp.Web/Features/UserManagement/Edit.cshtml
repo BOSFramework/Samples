@@ -1,0 +1,77 @@
+﻿@model BOS.SampleApp.Web.Features.UserManagement.EditUserViewModel
+
+<div>
+    <h1>Edit Profile</h1>
+
+    <form class="form-group" asp-controller="UserManagement" asp-action="Edit" method="post">
+        <input type="hidden" asp-for="Id" />
+        <input type="hidden" asp-for="EmailRecord" />
+        <input type="hidden" asp-for="BirthDate" />
+        Display Name:
+        <input asp-for="DisplayName" /><br />
+        First Name:
+        <input asp-for="FirstName" /><br />
+        Last Name:
+        <input asp-for="LastName" /><br />
+        Title:
+        <input asp-for="Title" /><br />
+        Phone Number:
+        <input asp-for="PhoneNumber.Number" /><br />
+        Birthdate: dd/MM/yyyy
+        <input asp-for="BirthDateString" /><br />
+        Gender:
+        <input asp-for="Gender" /><br />
+        Email:
+        <input asp-for="Email" /><br />
+        <button type="submit">Update</button>
+    </form>
+
+    <h4>Reset Password</h4>
+    <form class="form-group" asp-controller="UserManagement" asp-action="ResetPassword" method="post">
+    <input type="hidden" asp-for="Id" />
+        New Password: 
+        <input asp-for="NewPassword" />
+        <button type="submit">Update</button>
+</form>
+    <hr />
+    <h3>Role Management</h3>
+    <hr />
+    <h5>Assigned</h5>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Role</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var role in Model.AssignedRoles)
+            {
+                <tr>
+                    <td>@role.Name</td>
+                    <td><a asp-controller="UserManagement" asp-action="RevokeRole" asp-route-role="@role.Id" asp-route-user="@Model.Id">Remove</a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <br />
+    <h5>Not Assigned</h5>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Role</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var role in Model.AllRoles)
+            {
+                @if (!Model.AssignedRoles.Any(r => r.Id == role.Id))
+                {
+                    <tr>
+                        <td>@role.Name</td>
+                        <td><a asp-controller="UserManagement" asp-action="AddRole" asp-route-roleId="@role.Id" asp-route-userId="@Model.Id">Add</a></td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>

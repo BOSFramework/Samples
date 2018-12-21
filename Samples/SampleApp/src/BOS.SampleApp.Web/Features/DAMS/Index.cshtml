@@ -1,0 +1,30 @@
+﻿@model BOS.SampleApp.Web.Features.DAMS.DAMSViewModel
+<div>
+    <h1>My Collections</h1>
+    <hr />
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Collection</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(var collection in Model.Collections)
+            {
+                <tr>
+                    <td>@collection.Name</td>
+                    <td><a asp-controller="DAMS" asp-action="Collection" asp-route-id="@collection.Id">View</a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <br />
+    <h3>Add New Collection</h3>
+    <hr />
+    <form class="form-group" asp-controller="DAMS" asp-action="AddCollection" method="post">
+        Name: 
+        <input asp-for="NewCollection.Name" /><br />
+        Description: <textarea asp-for="NewCollection.Description"></textarea><br />
+        <button class="bg-primary" type="submit">Add</button>
+</form>
+</div>

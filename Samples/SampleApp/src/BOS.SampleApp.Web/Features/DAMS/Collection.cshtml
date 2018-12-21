@@ -1,0 +1,44 @@
+﻿@model BOS.SampleApp.Web.Features.DAMS.CollectionViewModel
+
+<div>
+    <h1>@Model.Collection.Name</h1>
+    <hr />
+    <p>Created On: @Model.Collection.CreatedOn</p>
+    <p>Created By: @Model.Collection.CreatedBy</p>
+    <p>LasModified: @Model.Collection.LastModifiedOn</p>
+    <p>Description: @Model.Collection.Description</p>
+    <br />
+    <h3>Assets</h3>
+    <hr />
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Asset Name</th>
+                <th>Asset URL</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(var asset in Model.Collection.Assets)
+            {
+                <tr>
+                    <td>@asset.Name</td>
+                    <td>@asset.URL</td>
+                    <td><a asp-controller="DAMS" asp-action="RemoveAsset" asp-route-asset="@asset.Id" asp-route-collection="@Model.Collection.Id">Remove</a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <form class="form-group" asp-controller="DAMS" asp-action="AddAsset">
+        <input type="hidden" asp-for="Collection.Id" />
+        Name: <br />
+        <input asp-for="NewAsset.Name" />
+        <br />
+        Url: <br />
+        <input asp-for="NewAsset.URL" />
+        <br />
+        <button type="submit" class="btn-primary">Add</button>
+</form>
+
+</div>

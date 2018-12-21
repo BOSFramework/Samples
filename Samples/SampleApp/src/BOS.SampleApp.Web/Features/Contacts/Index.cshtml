@@ -1,0 +1,34 @@
+﻿@model BOS.SampleApp.Web.Features.Contacts.ContactsViewModel
+
+<div>
+    <h1>Contacts</h1>
+    <hr />
+    <table class="table">
+        <thead>
+            <tr>
+
+                <th>Display Name</th>
+                <th>Email</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(var user in Model.Users)
+            {
+                <tr>
+                    <td>
+                        @if (Model.Profiles.Any(p => p.Id == user.Id) && Model.Profiles.FirstOrDefault(p => p.Id == user.Id).DisplayName != null)
+                        {
+                            @Model.Profiles.FirstOrDefault(p => p.Id == user.Id).DisplayName
+                        }
+                        else
+                        {
+                            @user.Email
+                        }
+                    </td>
+                    <td>@user.Email</td>
+                    <td><a asp-controller="Profile" asp-action="Details" asp-route-id="@user.Id">View Profile</a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

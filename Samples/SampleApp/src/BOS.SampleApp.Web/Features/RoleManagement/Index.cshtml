@@ -1,0 +1,32 @@
+﻿@model BOS.SampleApp.Web.Features.RoleManagement.RoleManagementViewModel
+
+<div>
+    <h1>Role Management</h1>
+    <hr />
+    <h3>All Roles</h3>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Role
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var role in Model.Roles)
+            {
+                <tr>
+                    <td>@role.Name</td>
+                    <td><a asp-controller="RoleMangement" asp-action="Remove" asp-route-roleId="@role.Id">Remove</a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <br />
+    <h3>Create New Role</h3>
+    <br />
+    <form class="form-group" asp-controller="RoleManagement" asp-action="Add" method="post">
+        <input asp-for="NewRoleName" /><br />
+        <button type="submit" class="btn-primary">Add</button>
+</form>
+</div>
