@@ -1,0 +1,26 @@
+﻿@model BOS.SampleApp.Web.Features.Profile.ProfileViewModel
+<div>
+    <h1>Profile</h1>
+
+    <form class="form-group" asp-controller="Profile" asp-action="Update" method="post">
+        <input type="hidden" asp-for="Id" />
+        <input type="hidden" asp-for="EmailRecord" />
+        Display Name: 
+        <input asp-for="DisplayName" /><br />
+        First Name: 
+    <input asp-for="FirstName" /><br />
+        Last Name: 
+        <input asp-for="LastName" /><br />
+        Title: 
+        <input asp-for="Title" /><br />
+        Phone Number: 
+        <input asp-for="PhoneNumber.Number" /><br />
+        Birthdate:
+        dd/MM/yyyy <input asp-for="BirthDateString" /><br />
+        Gender: 
+        <input asp-for="Gender" /><br />
+        Email: 
+        <input asp-for="Email" /><br />
+        <button type="submit">Update</button>
+</form>
+</div>

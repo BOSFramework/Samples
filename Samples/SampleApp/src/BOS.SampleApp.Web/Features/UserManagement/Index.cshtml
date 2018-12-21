@@ -1,0 +1,40 @@
+﻿@model BOS.SampleApp.Web.Features.UserManagement.UserManagementOverviewViewModel
+
+<div>
+    <h1>Manage Users and Stuff</h1>
+    <hr />
+    <table class="table">
+        <thead>
+            <tr>
+                <th>User Id</th>
+                <th>Username</th>
+                <th>Email</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(var user in Model.Users)
+            {
+                <tr>
+                    <td>@user.Id</td>
+                    <td>@user.Username</td>
+                    <td>@user.Email</td>
+                    <td><a asp-controller="UserManagement" asp-action="Edit" asp-route-id="@user.Id">Edit User</a></td>
+                    <td><a asp-controller="UserManagement" asp-action="Delete" asp-route-id="@user.Id">Delete</a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <br />
+    <h2>Add New User</h2>
+    <form asp-controller="UserManagement" asp-action="AddUser" method="post" class="form-group">
+        Username:
+        <input asp-for="NewUser.Username" /><br />
+        Email:
+        <input asp-for="NewUser.Email" /><br />
+        Password:
+        <input asp-for="NewUser.Password" type="password" /><br />
+        Retype Password:
+        <input asp-for="NewUser.PasswordConfirmation" type="password" /><br />
+        <button type="submit">Add</button>
+    </form>
+</div>
